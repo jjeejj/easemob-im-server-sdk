@@ -4,6 +4,8 @@ import (
 	"context"
 	"easemob-im-server-sdk/config"
 	"easemob-im-server-sdk/request"
+	"errors"
+	"net/http"
 )
 
 // IChatroom 聊天室 提供的接口能力
@@ -25,5 +27,19 @@ func New(config *config.EasemobConfig, httpClient *request.HttpClient) IChatroom
 }
 
 func (c *Chatroom) Create(ctx context.Context, reqParam *CreateReq) (*CreateResp, error) {
-	return nil, nil
+	var respData *CreateResp = &CreateResp{}
+	restResponse, err := c.httpClient.Post(ctx, ApiCreateChatroomPath, map[string]any{
+		"name":        reqParam.Name,
+		"description": reqParam.Description,
+		"maxusers":    reqParam.MaxUsers,
+		"owner":       reqParam.Owner,
+		"members":     reqParam.Members,
+		"custom":      reqParam.Custom,
+	}, map[string]string{
+		"Authorization": "Bearer " + reqParam.AppToken,
+	}, respData)
+	if restResponse.StatusCode() != http.StatusOK {
+		return nil, errors.New(restResponse.String())
+	}
+	return respData, err
 }

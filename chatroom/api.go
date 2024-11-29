@@ -12,6 +12,7 @@ type CreateReq struct {
 	Owner       string   `json:"owner"`       // 聊天室所有者
 	Members     []string `json:"members"`     // 聊天室普通成员和管理员的用户 ID 数组，不包含聊天室所有者的用户 ID。该数组可包含的元素数量不超过 maxusers 的值。若传该参数，确保至少设置一个数组元素。
 	Custom      string   // 聊天室扩展信息，例如，可以给聊天室添加业务相关的标记，不能超过 8 KB
+	AppToken    string   `json:"app_token"` // app token
 }
 
 type CreateResp struct {

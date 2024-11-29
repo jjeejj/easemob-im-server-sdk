@@ -2,6 +2,7 @@ package easemobimserversdk
 
 import (
 	"context"
+	"easemob-im-server-sdk/chatroom"
 	"easemob-im-server-sdk/config"
 	"easemob-im-server-sdk/token"
 	"encoding/json"
@@ -65,6 +66,21 @@ func TestGetUserDynamicToken(t *testing.T) {
 	tokenResp, err := easemobClient.Token.GetUserDynamicToken(context.Background(), &token.GetUserDynamicTokenReq{
 		TTl:      3600,
 		Username: "87352467",
+	})
+	if err != nil {
+		t.Error(err)
+	}
+	tokenRespByte, _ := json.Marshal(tokenResp)
+	t.Logf("tokenResp %v", string(tokenRespByte))
+}
+
+func TestCreateChatroom(t *testing.T) {
+	tokenResp, err := easemobClient.ChatRoom.Create(context.Background(), &chatroom.CreateReq{
+		Name:        "测试聊天室",
+		Description: "测试聊天室描述",
+		Owner:       "87352467",
+		AppToken:    appToken,
+		MaxUsers:    1000,
 	})
 	if err != nil {
 		t.Error(err)
