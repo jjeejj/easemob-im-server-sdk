@@ -3,13 +3,14 @@ package token
 import (
 	"context"
 	"crypto/sha256"
-	"easemob-im-server-sdk/config"
-	"easemob-im-server-sdk/request"
 	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/jjeejj/easemob-im-server-sdk/config"
+	"github.com/jjeejj/easemob-im-server-sdk/request"
 )
 
 // https://doc.easemob.com/document/server-side/easemob_app_token.html#http-请求

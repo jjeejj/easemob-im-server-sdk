@@ -1,11 +1,12 @@
 package easemobimserversdk
 
 import (
-	"easemob-im-server-sdk/chatroom"
-	"easemob-im-server-sdk/config"
-	"easemob-im-server-sdk/request"
-	"easemob-im-server-sdk/token"
 	"fmt"
+
+	"github.com/jjeejj/easemob-im-server-sdk/chatroom"
+	"github.com/jjeejj/easemob-im-server-sdk/config"
+	"github.com/jjeejj/easemob-im-server-sdk/request"
+	"github.com/jjeejj/easemob-im-server-sdk/token"
 )
 
 type Easemob struct {

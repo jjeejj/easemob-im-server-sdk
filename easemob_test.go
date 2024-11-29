@@ -2,11 +2,12 @@ package easemobimserversdk
 
 import (
 	"context"
-	"easemob-im-server-sdk/chatroom"
-	"easemob-im-server-sdk/config"
-	"easemob-im-server-sdk/token"
 	"encoding/json"
 	"testing"
+
+	"github.com/jjeejj/easemob-im-server-sdk/chatroom"
+	"github.com/jjeejj/easemob-im-server-sdk/config"
+	"github.com/jjeejj/easemob-im-server-sdk/token"
 )
 
 var easemobClient *Easemob

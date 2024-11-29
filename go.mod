@@ -1,8 +1,7 @@
-module easemob-im-server-sdk
+module github.com/jjeejj/easemob-im-server-sdk
 
 go 1.23.3
 
-require (
-	github.com/go-resty/resty/v2 v2.16.2 // indirect
-	golang.org/x/net v0.27.0 // indirect
-)
+require github.com/go-resty/resty/v2 v2.16.2
+
+require golang.org/x/net v0.27.0 // indirect

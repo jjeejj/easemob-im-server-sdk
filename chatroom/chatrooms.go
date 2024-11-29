@@ -2,10 +2,11 @@ package chatroom
 
 import (
 	"context"
-	"easemob-im-server-sdk/config"
-	"easemob-im-server-sdk/request"
 	"errors"
 	"net/http"
+
+	"github.com/jjeejj/easemob-im-server-sdk/config"
+	"github.com/jjeejj/easemob-im-server-sdk/request"
 )
 
 // IChatroom 聊天室 提供的接口能力
