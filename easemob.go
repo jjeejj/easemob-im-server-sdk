@@ -2,28 +2,29 @@ package easemobimserversdk
 
 import (
 	"easemob-im-server-sdk/chatroom"
+	"easemob-im-server-sdk/config"
+	"easemob-im-server-sdk/request"
 	"easemob-im-server-sdk/token"
+	"fmt"
 )
 
-type EasemobConfig struct {
-	ApiUrl       string // 接口请求的地址
-	OrgName      string // 环信企业名
-	AppName      string // 环信应用名
-	AppKey       string // 环信应用key
-	ClientId     string
-	ClientSecret string
-}
-
 type Easemob struct {
-	Config   *EasemobConfig
-	ChatRoom chatroom.IChatroom
-	Token    token.IToken
+	Config     *config.EasemobConfig
+	ChatRoom   chatroom.IChatroom
+	Token      token.IToken
+	httpClient *request.HttpClient // 发送请求的客户端
 }
 
 // New  Easemob client
-func New(config *EasemobConfig) *Easemob {
+func New(config *config.EasemobConfig) *Easemob {
+	if config.ApiUrl == "" || config.AppKey == "" || config.ClientId == "" || config.ClientSecret == "" || config.OrgName == "" || config.AppName == "" {
+		panic("config error")
+	}
+	httpClient := request.New(fmt.Sprintf("%s/%s/%s", config.ApiUrl, config.OrgName, config.AppName))
 	return &Easemob{
-		Config:   config,
-		ChatRoom: chatroom.New(),
+		Config:     config,
+		httpClient: httpClient,
+		ChatRoom:   chatroom.New(config, httpClient),
+		Token:      token.New(config, httpClient),
 	}
 }

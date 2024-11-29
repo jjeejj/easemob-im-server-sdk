@@ -11,7 +11,7 @@
 ```golang
 
 // 实例化
-easemobClient = New(&EasemobConfig{
+easemobClient = New(&config.EasemobConfig{
     ApiUrl:       "https://a1.easemob.com",
     OrgName:      "easemob-cn",
     AppName:      "test",

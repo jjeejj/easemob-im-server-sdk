@@ -27,8 +27,15 @@ type GetAppTokenResp struct {
 }
 
 type GetUserTokenReq struct {
+	Username       string `json:"username"`  // 用户 ID。
+	AppToken       string `json:"app_token"` // app token
+	TTl            int64  `json:"ttl"`
+	AutoCreateUser bool   `json:"auto_create_user"` // 当用户不存在时，是否自动创建用户。自动创建用户时，需保证授权方式（grant_type）必须为 inherit，API 请求 header 中使用 App token 进行鉴权
+}
+
+type GetUserTokenByPasswordReq struct {
 	Username string `json:"username"` // 用户 ID。
-	Password string `json:"password"` // 用户密码, 该字段只有通过密码获取用户token 的时候才进行传
+	Password string `json:"password"`
 	TTl      int64  `json:"ttl"`
 }
 
@@ -37,7 +44,7 @@ type GetUserTokenResp struct {
 	// 	token 有效期，单位为秒。在有效期内无需重复获取。
 	// 注意：VIP 5 集群该参数单位为毫秒
 	ExpiresIn int64    `json:"expires_in"`
-	User      struct { // 用户信息：动态 token 不返回该字段
+	User      struct { // 用户信息
 		Username string `json:"username"`
 		UUID     string `json:"uuid"`
 		Created  int64  `json:"created"`  // 册用户的 Unix 时间戳，单位为毫秒
@@ -47,4 +54,15 @@ type GetUserTokenResp struct {
 		// - false：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用解禁用户的 API对账号解除封禁。
 		Activated bool `json:"activated"`
 	} `json:"user"`
+}
+
+type GetUserDynamicTokenReq struct {
+	Username string `json:"username"` // 用户 ID
+	TTl      int64  `json:"ttl"`
+}
+
+type GetUserDynamicTokenResp struct {
+	AccessToken string `json:"access_token"`
+	// 	token 有效期，单位为秒。在有效期内无需重复获取。
+	ExpiresIn int64 `json:"expires_in"`
 }
