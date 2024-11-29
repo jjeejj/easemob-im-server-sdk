@@ -1,6 +1,7 @@
 package easemobimserversdk
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/jjeejj/easemob-im-server-sdk/chatroom"
@@ -17,9 +18,9 @@ type Easemob struct {
 }
 
 // New  Easemob client
-func New(config *config.EasemobConfig) *Easemob {
+func New(config *config.EasemobConfig) (*Easemob, error) {
 	if config.ApiUrl == "" || config.AppKey == "" || config.ClientId == "" || config.ClientSecret == "" || config.OrgName == "" || config.AppName == "" {
-		panic("config error")
+		return nil, errors.New("config error")
 	}
 	httpClient := request.New(fmt.Sprintf("%s/%s/%s", config.ApiUrl, config.OrgName, config.AppName))
 	return &Easemob{
@@ -27,5 +28,5 @@ func New(config *config.EasemobConfig) *Easemob {
 		httpClient: httpClient,
 		ChatRoom:   chatroom.New(config, httpClient),
 		Token:      token.New(config, httpClient),
-	}
+	}, nil
 }
