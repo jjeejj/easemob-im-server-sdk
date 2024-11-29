@@ -13,7 +13,7 @@ import (
 var easemobClient *Easemob
 
 func init() {
-	easemobClient = New(&config.EasemobConfig{
+	easemobClient, _ = New(&config.EasemobConfig{
 		ApiUrl:       "http://a1.easecdn.com",
 		OrgName:      "xxxx",
 		AppName:      "demo",

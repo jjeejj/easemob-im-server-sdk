@@ -1,10 +1,33 @@
 # 环信 im 接口封装
 
+## 结构设计
+按照功能模块化进行设计，后续可以按照这样的规则 增加对应的接口
+```golang
+├── LICENSE
+├── README.md
+├── chatroom # 聊天室模块
+│   ├── api.go # 聊天室相关结构体
+│   └── chatroom.go # 接口封装
+├── config # 配置模块
+│   └── config.go
+├── easemob.go # 主文件
+├── easemob_test.go # c 测试文件
+├── go.mod
+├── go.sum
+├── request # 对外发送请求
+│   └── request.go
+└── token  # 获取相关 token 模块
+    ├── api.go
+    └── token.go
+```
+
 ## 使用方式
 
 ### 安装
 
 `go get github.com/jjeejj/easemob-im-server-sdk`
+
+> 这里如果拉取不下拉，可以指定最新 commit 重新拉取 go get github.com/jjeejj/easemob-im-server-sdk@{commit-hash}
 
 ### 调用
 
