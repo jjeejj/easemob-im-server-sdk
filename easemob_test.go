@@ -93,8 +93,10 @@ func TestCreateChatroom(t *testing.T) {
 
 func TestRegistryUser(t *testing.T) {
 	registryUserResp, err := easemobClient.User.Registry(context.Background(), &user.RegistryReq{
-		UserName: "64899890",
-		Password: "64899890",
+		User: user.RegistryReqUserInfo{
+			Username: "64899890",
+			Password: "64899890",
+		},
 		AppToken: appToken,
 	})
 	if err != nil {
@@ -106,10 +108,7 @@ func TestRegistryUser(t *testing.T) {
 
 func TestBatchRegistryUser(t *testing.T) {
 	registryUserResp, err := easemobClient.User.BatchRegistry(context.Background(), &user.BatchRegistryReq{
-		Users: []struct {
-			Username string `json:"username"`
-			Password string `json:"password"`
-		}{
+		Users: []user.RegistryReqUserInfo{
 			{Username: "22474669", Password: "22474669"},
 			{Username: "89425812", Password: "89425812"},
 		},

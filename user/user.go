@@ -30,8 +30,8 @@ func New(config *config.EasemobConfig, httpClient *request.HttpClient) IUser {
 func (u *User) Registry(ctx context.Context, reqParam *RegistryReq) (*RegistryResp, error) {
 	var respData *RegistryResp = &RegistryResp{}
 	restResponse, err := u.httpClient.Post(ctx, ApiRegistryUserPath, map[string]any{
-		"username": reqParam.UserName,
-		"password": reqParam.Password,
+		"username": reqParam.User.Username,
+		"password": reqParam.User.Password,
 	}, map[string]string{
 		"Authorization": "Bearer " + reqParam.AppToken,
 	}, respData)
