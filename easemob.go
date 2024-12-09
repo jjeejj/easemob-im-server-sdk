@@ -8,12 +8,14 @@ import (
 	"github.com/jjeejj/easemob-im-server-sdk/config"
 	"github.com/jjeejj/easemob-im-server-sdk/request"
 	"github.com/jjeejj/easemob-im-server-sdk/token"
+	"github.com/jjeejj/easemob-im-server-sdk/user"
 )
 
 type Easemob struct {
 	Config     *config.EasemobConfig
 	ChatRoom   chatroom.IChatroom
 	Token      token.IToken
+	User       user.IUser
 	httpClient *request.HttpClient // 发送请求的客户端
 }
 
@@ -28,5 +30,6 @@ func New(config *config.EasemobConfig) (*Easemob, error) {
 		httpClient: httpClient,
 		ChatRoom:   chatroom.New(config, httpClient),
 		Token:      token.New(config, httpClient),
+		User:       user.New(config, httpClient),
 	}, nil
 }

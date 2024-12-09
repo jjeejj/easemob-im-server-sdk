@@ -56,3 +56,8 @@ easemobClient.Token.GetAppToken(context.Background(), &token.GetAppTokenReq{
 
 ### 聊天室
     [x] 创建聊天室
+
+### 用户
+    [x] 授权注册单个用户
+    [x] 批量授权注册用户
+
