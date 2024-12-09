@@ -11,14 +11,17 @@
 ├── config # 配置模块
 │   └── config.go
 ├── easemob.go # 主文件
-├── easemob_test.go # c 测试文件
+├── easemob_test.go # 测试文件
 ├── go.mod
 ├── go.sum
 ├── request # 对外发送请求
 │   └── request.go
 └── token  # 获取相关 token 模块
+│   ├── api.go
+│   └── token.go
+└── user  # 用户 模块
     ├── api.go
-    └── token.go
+    └── user.go
 ```
 
 ## 使用方式
