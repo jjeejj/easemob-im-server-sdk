@@ -10,9 +10,12 @@ import (
 )
 
 // IChatroom 聊天室 提供的接口能力
-// https://doc.easemob.com/document/server-side/chatroom_manage.html#创建聊天室
+
 type IChatroom interface {
+	// https://doc.easemob.com/document/server-side/chatroom_manage.html#创建聊天室
 	Create(ctx context.Context, reqParam *CreateReq) (*CreateResp, error) // 创建聊天室
+	// https://doc.easemob.com/document/server-side/message_chatroom.html#http-请求-3
+	SendMessage(ctx context.Context, reqParam *SendMessageReq) (*SendMessageResp, error) // 发送消息
 }
 
 type Chatroom struct {
@@ -37,6 +40,17 @@ func (c *Chatroom) Create(ctx context.Context, reqParam *CreateReq) (*CreateResp
 		"members":     reqParam.Members,
 		"custom":      reqParam.Custom,
 	}, map[string]string{
+		"Authorization": "Bearer " + reqParam.AppToken,
+	}, respData)
+	if restResponse.StatusCode() != http.StatusOK {
+		return nil, errors.New(restResponse.String())
+	}
+	return respData, err
+}
+
+func (c *Chatroom) SendMessage(ctx context.Context, reqParam *SendMessageReq) (*SendMessageResp, error) {
+	var respData *SendMessageResp = &SendMessageResp{}
+	restResponse, err := c.httpClient.Post(ctx, ApiSendMessagePath, reqParam, map[string]string{
 		"Authorization": "Bearer " + reqParam.AppToken,
 	}, respData)
 	if restResponse.StatusCode() != http.StatusOK {

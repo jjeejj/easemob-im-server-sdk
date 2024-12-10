@@ -24,7 +24,7 @@ func init() {
 	})
 }
 
-var appToken = "YWMt3Vtn_rXhEe-sJW-YODrWhZgXHToj1TUqkTguT5AFcZal563Tg2FHiqkrRPj0_wlqAgMAAAGTqZGpAwAADhDYHsWXJ6UOswc_juwMG0GiI4k9mR_7nihVzaSpg"
+var appToken = "YWMtod4HMraeEe-VaA3Tfb9uHJgXHToj1TUqkTguT5AFcZal563Tg2FHiqkrRPj0_wlqAgMAAAGTrmbEhgAADhB2vTq53ha4EYK_I0yMsVCpVMm5v8ffWhIZnMkwhVA8Jg"
 
 func TestGetAppToken(t *testing.T) {
 	tokenResp, err := easemobClient.Token.GetAppToken(context.Background(), &token.GetAppTokenReq{
@@ -118,4 +118,44 @@ func TestBatchRegistryUser(t *testing.T) {
 	}
 	registryUserRespByte, _ := json.Marshal(registryUserResp)
 	t.Logf("registryUserResp %v", string(registryUserRespByte))
+}
+
+func TestChatroomSendCmdMessage(t *testing.T) {
+	chatroomSendMessageResp, err := easemobClient.ChatRoom.SendMessage(context.Background(), &chatroom.SendMessageReq{
+		AppToken: appToken,
+		Type:     chatroom.MessageTypeCmd,
+		From:     "admin",
+		To:       []string{"266681441124359"},
+		Body: chatroom.SendCmdMessageBody{
+			Action: "gift",
+		},
+	})
+	if err != nil {
+		t.Error(err)
+	}
+	chatroomSendMessageRespByte, _ := json.Marshal(chatroomSendMessageResp)
+	t.Logf("chatroomSendMessageResp %v", string(chatroomSendMessageRespByte))
+}
+
+func TestChatroomSendCustomerMessage(t *testing.T) {
+	chatroomSendMessageResp, err := easemobClient.ChatRoom.SendMessage(context.Background(), &chatroom.SendMessageReq{
+		AppToken: appToken,
+		Type:     chatroom.MessageTypeCmd,
+		From:     "admin",
+		To:       []string{"266681441124359"},
+		Body: chatroom.SendCustomMessageBody{
+			CustomEvent: "send_gift",
+			CustomExts: map[string]string{
+				"gift_id":    "1",
+				"gift_name":  "1",
+				"gift_price": "1",
+				"gift_num":   "1",
+			},
+		},
+	})
+	if err != nil {
+		t.Error(err)
+	}
+	chatroomSendMessageRespByte, _ := json.Marshal(chatroomSendMessageResp)
+	t.Logf("chatroomSendMessageResp %v", string(chatroomSendMessageRespByte))
 }
