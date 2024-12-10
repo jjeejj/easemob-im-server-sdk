@@ -54,14 +54,14 @@ easemobClient.Token.GetAppToken(context.Background(), &token.GetAppTokenReq{
 ## 目前已经实现功能
 
 ### Token
-    [x] 获取 APP Token
-    [x] 获取 User Token
+- [x] 获取 APP Token
+- [x] 获取 User Token
 
 ### 聊天室
-    [x] 创建聊天室
-    [x] 发送聊天室消息
+- [x] 创建聊天室
+- [x] 发送聊天室消息
 
 ### 用户
-    [x] 授权注册单个用户
-    [x] 批量授权注册用户
+- [x] 授权注册单个用户
+- [x] 批量授权注册用户
 
